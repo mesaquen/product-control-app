@@ -1,4 +1,6 @@
-# Drawer navigation example
+# Product control app
+
+Basic product control react native app using Expo drawer navigation template as starting point.
 
 <p>
   <!-- iOS -->
@@ -9,12 +11,7 @@
   <img alt="Supports Expo Web" longdesc="Supports Expo Web" src="https://img.shields.io/badge/web-4630EB.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" />
 </p>
 
-## 🚀 How to use
+## How to use
 
 - Install with `yarn` or `npm install`.
 - Run `expo start` to try it out.
-
-## 📝 Notes
-
-- This is a very basic example from the [react navigation](https://reactnavigation.org/) docs.
-- [Drawer navigation documentation](https://reactnavigation.org/docs/drawer-based-navigation).
