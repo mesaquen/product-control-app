@@ -1,50 +1,59 @@
-import React from 'react';
-import { Button, View, Text } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import {observer} from 'mobx-react-lite'
+import React, { useEffect } from 'react'
+import { Button, View, Text, SafeAreaView } from 'react-native'
+import { createDrawerNavigator } from '@react-navigation/drawer'
+import { NavigationContainer } from '@react-navigation/native'
+import { observer } from 'mobx-react-lite'
 import userStore from './src/mobx/UserStore'
+import Fetch from './src/logic/Fetch'
+import Logger from './src/utils/Logger'
 
-function HomeScreen({ navigation }) {
+const HomeScreen = observer(() => {
+  useEffect(() => {
+    const body = JSON.stringify({
+      identifier: 'email',
+      password: 'password'
+    })
+    Logger.log(body)
+    Fetch('/auth/local', {
+      method: 'POST',
+      body
+    })
+      .then(response => response.json())
+      .then(data => {
+        Logger.log(data)
+        userStore.setUserContext(data)
+      })
+      .catch(Logger.error)
+  }, [])
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={navigation.openDrawer}
-        title="Open navigation drawer"
-      />
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
-    </View>
-  );
-}
-
-const NotificationsScreen = observer(({ navigation }) => {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <SafeAreaView>
       <Text>{JSON.stringify(userStore.userContext)}</Text>
-      <Button
-        onPress={navigation.openDrawer}
-        title="Open navigation drawer"
-      />
-      <Button
-        onPress={() => userStore.setUserContext({sample: 'pl'})}
-        title="Go back home"
-      />
-    </View>
-  );
+    </SafeAreaView>
+  )
 })
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator()
 
-export default function App() {
+export default function App () {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
+    
+      <NavigationContainer>
+        <Drawer.Navigator initialRouteName='Home'>
+          <Drawer.Screen
+            name='Home'
+            component={HomeScreen}
+            options={{
+              title: 'My home',
+              headerLeft: () => (
+                <Button
+                  onPress={() => alert('this is a button')}
+                  color='#FFF'
+                  title='info'
+                />
+              )
+            }}
+          />
+        </Drawer.Navigator>
+      </NavigationContainer>
+  )
 }
