@@ -6,7 +6,8 @@ import { getProducts } from '../../logic/ProductSource'
 import Logger from '../../utils/Logger'
 
 const ProductList = observer(() => {
-  const items = catalogStore.products.slice()
+  const filterByEnabled = item => item.enabled
+  const enabledItems = catalogStore.products.slice().filter(filterByEnabled)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +26,7 @@ const ProductList = observer(() => {
 
   return (
     <ScrollView>
-      {items.map(item => (
+      {enabledItems.map(item => (
         <View key={item.id}>
           <Text>{item.name}</Text>
         </View>
