@@ -8,6 +8,7 @@ import {
   StatusBar,
   Text
 } from 'react-native'
+import LoginForm from '../../component/login-form/LoginForm'
 import Fetch from '../../logic/Fetch'
 import userStore from '../../mobx/UserStore'
 import Logger from '../../utils/Logger'
@@ -15,13 +16,8 @@ import styles from './LoginScreen.styles'
 
 const LoginScreen = observer(() => {
   const [loading, setLoading] = useState(false)
-  const [identifier, setIdentifier] = useState('')
-  const [password, setPassword] = useState('')
 
-  const handleChangePassword = value => setPassword(value)
-  const handleChangeIdentifier = value => setIdentifier(value)
-
-  const handlePress = async () => {
+  const handleSubmit = async ({ identifier, password }) => {
     setLoading(true)
     try {
       const method = 'POST'
@@ -61,24 +57,7 @@ const LoginScreen = observer(() => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar />
-      <TextInput
-        style={styles.input}
-        type='email'
-        placeholder='email'
-        onChangeText={handleChangeIdentifier}
-      />
-      <TextInput
-        style={styles.input}
-        type='password'
-        placeholder='senha'
-        onChangeText={handleChangePassword}
-        secureTextEntry
-      />
-      {loading ? (
-        <ActivityIndicator color='#0000FF' />
-      ) : (
-        <Button title='Continuar' onPress={handlePress} />
-      )}
+      <LoginForm onSubmit={handleSubmit} loading={loading} />
     </SafeAreaView>
   )
 })
