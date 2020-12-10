@@ -7,6 +7,7 @@ import userStore from './src/mobx/UserStore'
 import Fetch from './src/logic/Fetch'
 import Logger from './src/utils/Logger'
 import LoginScreen from './src/screens/login/LoginScreen'
+import ProductList from './src/screens/product-list/ProductList'
 
 const Drawer = createDrawerNavigator()
 
@@ -16,7 +17,7 @@ export default function App () {
       <Drawer.Navigator initialRouteName='Home'>
         <Drawer.Screen
           name='Home'
-          component={LoginScreen}
+          component={ProductList}
           options={{
             title: 'Sair',
             headerLeft: () => (
