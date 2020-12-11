@@ -9,6 +9,7 @@ import Fetch from './src/logic/Fetch'
 import Logger from './src/utils/Logger'
 import ProductList from './src/screens/product-list/ProductList'
 import LoginScreen from './src/screens/login/LoginScreen'
+import CatalogScreen from './src/screens/catalog/CatalogScreen'
 
 const Tab = createBottomTabNavigator()
 
@@ -27,7 +28,7 @@ export default function App () {
           />
           <Tab.Screen
             name='Catalog'
-            component={ProductList}
+            component={CatalogScreen}
             options={{
               title: 'Gerenciar Catálogo'
             }}

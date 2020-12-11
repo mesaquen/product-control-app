@@ -10,7 +10,6 @@ const UserAccountDetails = observer(() => {
     const {
       user: { email, username }
     } = userStore.userContext
-    debugger
     return (
       <IconMessage
       icon="account-circle-outline"
