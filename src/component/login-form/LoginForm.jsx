@@ -41,7 +41,7 @@ const LoginForm = observer(({ loading, onSubmit }) => {
         mode='outlined'
         right={<TextInput.Icon name="eye" onPress={togglePasswordVisibility}/>}
       />
-      <Button onPress={handlePress} loading={loading}>
+      <Button onPress={handlePress} loading={loading} disabled={loading}>
         Continuar
       </Button>
     </>
