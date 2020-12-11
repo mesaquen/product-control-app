@@ -2,7 +2,12 @@ import React, { useEffect } from 'react'
 import { Button, View, Text, SafeAreaView, StatusBar } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
-import { DefaultTheme, Colors, Provider as PaperProvider } from 'react-native-paper'
+import {
+  DefaultTheme,
+  Colors,
+  Provider as PaperProvider
+} from 'react-native-paper'
+import { MaterialCommunityIcons as MCI } from '@expo/vector-icons'
 import { observer } from 'mobx-react-lite'
 import userStore from './src/mobx/UserStore'
 import Fetch from './src/logic/Fetch'
@@ -21,12 +26,39 @@ const theme = {
   }
 }
 
+const icons = {
+  ProductList: {
+    default: 'view-list',
+  },
+  Catalog: {
+    default: 'tune',
+  },
+  Login: {
+    default: 'account-outline',
+    focused: 'account'
+  }
+}
+
+const getIconName = (focused, route) => {
+  Logger.log(route)
+  const key = focused ? 'focused' : 'default'
+  return icons[route.name]?.[key] ?? icons[route.name]?.default
+}
+
 export default function App () {
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer>
         <StatusBar />
-        <Tab.Navigator initialRouteName='ProductList'>
+        <Tab.Navigator
+          initialRouteName='ProductList'
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, size, color }) => {
+              const iconName = getIconName(focused, route)
+              return <MCI name={iconName} size={size} color={color} />
+            }
+          })}
+        >
           <Tab.Screen
             name='ProductList'
             component={ProductList}
