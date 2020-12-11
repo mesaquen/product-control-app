@@ -9,6 +9,7 @@ import {
   Text
 } from 'react-native'
 import LoginForm from '../../component/login-form/LoginForm'
+import UserAccountDetails from '../../component/user-account-details/UserAccountDetails'
 import Fetch from '../../logic/Fetch'
 import userStore from '../../mobx/UserStore'
 import Logger from '../../utils/Logger'
@@ -19,6 +20,7 @@ const LoginScreen = observer(() => {
 
   const handleSubmit = async ({ identifier, password }) => {
     setLoading(true)
+
     try {
       const method = 'POST'
       const body = JSON.stringify({
@@ -30,7 +32,7 @@ const LoginScreen = observer(() => {
         method,
         body
       })
-      debugger
+
       if (response.ok) {
         const userContext = await response.json()
         userStore.setUserContext(userContext)
@@ -42,22 +44,14 @@ const LoginScreen = observer(() => {
     }
   }
 
-  if (userStore.userContext) {
-    const {
-      user: { email, username }
-    } = userStore.userContext
-    return (
-      <SafeAreaView style={styles.container}>
-        <Text>{username}</Text>
-        <Text>{email}</Text>
-      </SafeAreaView>
-    )
-  }
-
+  debugger
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar />
-      <LoginForm onSubmit={handleSubmit} loading={loading} />
+      {userStore.userContext ? (
+        <UserAccountDetails />
+      ) : (
+        <LoginForm onSubmit={handleSubmit} loading={loading} />
+      )}
     </SafeAreaView>
   )
 })
