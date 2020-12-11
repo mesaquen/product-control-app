@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Button, View, Text, SafeAreaView, StatusBar } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
-import { Provider as PaperProvider } from 'react-native-paper'
+import { DefaultTheme, Colors, Provider as PaperProvider } from 'react-native-paper'
 import { observer } from 'mobx-react-lite'
 import userStore from './src/mobx/UserStore'
 import Fetch from './src/logic/Fetch'
@@ -13,9 +13,17 @@ import CatalogScreen from './src/screens/catalog/CatalogScreen'
 
 const Tab = createBottomTabNavigator()
 
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    text: Colors.grey700
+  }
+}
+
 export default function App () {
   return (
-    <PaperProvider>
+    <PaperProvider theme={theme}>
       <NavigationContainer>
         <StatusBar />
         <Tab.Navigator initialRouteName='ProductList'>
