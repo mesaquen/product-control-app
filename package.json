@@ -1,8 +1,9 @@
 {
   "dependencies": {
     "@react-native-community/masked-view": "~0.1.10",
-    "@react-navigation/drawer": "~5.8.4",
+    "@react-navigation/bottom-tabs": "^5.11.2",
     "@react-navigation/native": "~5.6.1",
+    "@react-navigation/stack": "^5.12.8",
     "expo": "~39.0.0",
     "mobx": "^6.0.4",
     "mobx-react": "^7.0.5",
