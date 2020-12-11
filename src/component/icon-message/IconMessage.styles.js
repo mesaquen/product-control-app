@@ -4,11 +4,7 @@ export default StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     flex: 1,
-    alignContent: 'center',
-    justifyContent: 'center'
-  },
-  icon: {},
-  title: {},
-  subtitle: {},
-  button: {}
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 })

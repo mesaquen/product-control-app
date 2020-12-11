@@ -13,6 +13,7 @@ const UserAccountDetails = observer(() => {
     debugger
     return (
       <IconMessage
+      icon="account-circle-outline"
         title={username}
         subtitle={email}
         buttonLabel='Desconectar'
