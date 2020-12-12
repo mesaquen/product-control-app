@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { observer } from 'mobx-react'
-import { SafeAreaView, View, Text, FlatList } from 'react-native'
+import { SafeAreaView, FlatList } from 'react-native'
 import userStore from '../../mobx/UserStore'
 import catalogStore from '../../mobx/CatalogStore'
 import ScreenPermissionWarning from '../../component/screen-permission-warning/ScreenPermissionWarning'
@@ -25,11 +25,23 @@ const CatalogScreen = observer(({ navigation }) => {
     }
   }, [])
 
+  const handleEdit = () => {}
+  const handleRemove = () => {}
+
   const renderItem = ({ item }) => {
-    Logger.log(JSON.stringify(item))
-    return <ProductListItem name={item.name} description={item.description} />
+    return (
+      <ProductListItem
+        id={item.id}
+        name={item.name}
+        enabled={item.enabled}
+        onEdit={handleEdit}
+        onRemove={handleRemove}
+        description={item.description}
+      />
+    )
   }
-  const keyExtractor = (item) => item.id.toString()
+  const keyExtractor = item => item.id.toString()
+
   return (
     <SafeAreaView>
       {userStore.userContext ? (

@@ -11,6 +11,8 @@ import styles from './ProductListItem.styles'
 
 const ProductListItem = ({
   loading,
+  enabled,
+  id,
   name,
   description,
   onEdit,
@@ -27,11 +29,15 @@ const ProductListItem = ({
       </View>
     )
   }
+
+const handleEdit = () => onEdit(id)
+const handleRemove = () => onRemove(id)
+ 
   return (
     <View {...props} style={styles.container}>
       <View style={styles.infoContainer}>
-        <Title style={styles.name}>{name}</Title>
-        <Text style={styles.description}>{description}</Text>
+        <Title style={enabled ? styles.name : styles.disabled}>{name}</Title>
+        <Text style={enabled ? styles.description : styles.disabled}>{description}</Text>
       </View>
       <View style={styles.buttonsContainer}>
         {onEdit && (
@@ -39,7 +45,7 @@ const ProductListItem = ({
             style={styles.button}
             icon='pencil'
             color={Colors.grey700}
-            onPress={onEdit}
+            onPress={handleEdit}
           />
         )}
         {onRemove && (
@@ -47,7 +53,7 @@ const ProductListItem = ({
             style={styles.button}
             icon='delete'
             color={Colors.grey700}
-            onPress={onEdit}
+            onPress={handleRemove}
           />
         )}
       </View>
@@ -56,11 +62,17 @@ const ProductListItem = ({
 }
 
 ProductListItem.propTypes = {
+  id: PropTypes.number.isRequired,
   loading: PropTypes.bool,
+  enabled: PropTypes.bool,
   name: PropTypes.string,
   description: PropTypes.string,
   onEdit: PropTypes.func,
   onRemove: PropTypes.func
+}
+
+ProductListItem.defaultProps = {
+  enabled: true,
 }
 
 export default ProductListItem

@@ -30,7 +30,11 @@ const ProductList = observer(() => {
   }, [])
 
   const renderItem = ({ item }) => (
-    <ProductListItem name={item.name} description={item.description} />
+    <ProductListItem
+      id={item.id}
+      name={item.name}
+      description={item.description}
+    />
   )
 
   const keyExtractor = item => item.id.toString()

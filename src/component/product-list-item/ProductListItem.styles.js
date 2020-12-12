@@ -27,6 +27,12 @@ export default StyleSheet.create({
     backgroundColor: Colors.grey400
 },
 
+
+disabled: {
+  fontStyle: 'italic',
+  color: Colors.grey400
+},
+
   description: {
     color: Colors.grey500
   }
