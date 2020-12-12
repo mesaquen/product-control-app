@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Button, View, Text, SafeAreaView, StatusBar } from 'react-native'
+import { StatusBar } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 import {
@@ -8,10 +8,6 @@ import {
   Provider as PaperProvider
 } from 'react-native-paper'
 import { MaterialCommunityIcons as MCI } from '@expo/vector-icons'
-import { observer } from 'mobx-react-lite'
-import userStore from './src/mobx/UserStore'
-import Fetch from './src/logic/Fetch'
-import Logger from './src/utils/Logger'
 import ProductList from './src/screens/product-list/ProductList'
 import LoginScreen from './src/screens/login/LoginScreen'
 import CatalogScreen from './src/screens/catalog/CatalogScreen'
@@ -28,10 +24,10 @@ const theme = {
 
 const icons = {
   ProductList: {
-    default: 'view-list',
+    default: 'view-list'
   },
   Catalog: {
-    default: 'tune',
+    default: 'tune'
   },
   Login: {
     default: 'account-outline',
@@ -40,7 +36,6 @@ const icons = {
 }
 
 const getIconName = (focused, route) => {
-  Logger.log(route)
   const key = focused ? 'focused' : 'default'
   return icons[route.name]?.[key] ?? icons[route.name]?.default
 }

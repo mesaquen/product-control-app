@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { ScrollView, View, Text } from 'react-native'
+import { ScrollView, FlatList } from 'react-native'
 import { observer } from 'mobx-react'
 import catalogStore from '../../mobx/CatalogStore'
 import { getProducts } from '../../logic/ProductSource'
 import Logger from '../../utils/Logger'
 import ProductListItem from '../../component/product-list-item/ProductListItem'
+import ItemSeparator from '../../component/item-separator/ItemSeparator'
 
 const ProductList = observer(() => {
   const [loading, setLoading] = useState(true)
@@ -28,6 +29,12 @@ const ProductList = observer(() => {
     fetchData()
   }, [])
 
+  const renderItem = ({ item }) => (
+    <ProductListItem name={item.name} description={item.description} />
+  )
+
+  const keyExtractor = item => item.id.toString()
+
   if (loading) {
     return (
       <ScrollView>
@@ -38,15 +45,12 @@ const ProductList = observer(() => {
   }
 
   return (
-    <ScrollView>
-      {enabledItems.map(item => (
-        <ProductListItem
-          key={item.id}
-          name={item.name}
-          description={item.description}
-        />
-      ))}
-    </ScrollView>
+    <FlatList
+      data={enabledItems}
+      ItemSeparatorComponent={ItemSeparator}
+      keyExtractor={keyExtractor}
+      renderItem={renderItem}
+    />
   )
 })
 
