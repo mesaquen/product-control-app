@@ -1,10 +1,11 @@
-import {StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
-    container: {
-        paddingHorizontal: 16,
-        flex: 1,
-        alignContent: 'center',
-        justifyContent: 'center'
-    }
+  container: { flex: 1 },
+  formContainer: {
+    paddingHorizontal: 16,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center'
+  }
 })
