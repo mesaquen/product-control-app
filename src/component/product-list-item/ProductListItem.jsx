@@ -62,7 +62,7 @@ const handleRemove = () => onRemove(id)
 }
 
 ProductListItem.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.number,
   loading: PropTypes.bool,
   enabled: PropTypes.bool,
   name: PropTypes.string,

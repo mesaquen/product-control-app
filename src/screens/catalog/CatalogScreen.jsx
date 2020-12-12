@@ -7,6 +7,7 @@ import ScreenPermissionWarning from '../../component/screen-permission-warning/S
 import ProductListItem from '../../component/product-list-item/ProductListItem'
 import Logger from '../../utils/Logger'
 import ItemSeparator from '../../component/item-separator/ItemSeparator'
+import styles from '../../component/common.styles'
 
 const CatalogScreen = observer(({ navigation }) => {
   const items = catalogStore.products.slice()
@@ -43,7 +44,7 @@ const CatalogScreen = observer(({ navigation }) => {
   const keyExtractor = item => item.id.toString()
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       {userStore.userContext ? (
         <FlatList
           data={items}

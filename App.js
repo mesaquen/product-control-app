@@ -47,6 +47,9 @@ export default function App () {
         <StatusBar />
         <Tab.Navigator
           initialRouteName='ProductList'
+          tabBarOptions={{
+            activeTintColor: theme.colors.primary
+          }}
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, size, color }) => {
               const iconName = getIconName(focused, route)
