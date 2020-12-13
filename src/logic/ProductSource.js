@@ -1,3 +1,4 @@
+import Logger from '../utils/Logger'
 import Fetch from './Fetch'
 
 export const getProducts =  async () => {
@@ -8,6 +9,21 @@ export const getProducts =  async () => {
     }
 
     return []
+}
+
+export const addProduct = async (product) => {
+    try {
+        const persistedProduct = await Fetch('/products', {
+            method: 'POST',
+            body: JSON.stringify(product)
+        })
+        Logger.log('PERSISTED PRODUCT', persistedProduct)
+        return persistedProduct
+    } catch (e) {
+        Logger.error(e)
+    }
+
+    return null
 }
 
 export const deleteById = async id => {

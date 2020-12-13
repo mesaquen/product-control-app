@@ -9,7 +9,7 @@ const getHeaders = userContext => {
   if (userStore.userContext) {
     return {
       ...baseHeaders,
-      Authentication: `Bearer ${userContext.jwt}`
+      Authorization: `Bearer ${userContext.jwt}`
     }
   }
   return { ...baseHeaders }
