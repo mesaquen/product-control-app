@@ -1,13 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { observer } from 'mobx-react'
 import { SafeAreaView, FlatList } from 'react-native'
-import { Button, IconButton, Colors, Dialog, Paragraph } from 'react-native-paper'
+import {
+  Button,
+  IconButton,
+  Colors,
+  Dialog,
+  Paragraph
+} from 'react-native-paper'
 import userStore from '../../mobx/UserStore'
 import catalogStore from '../../mobx/CatalogStore'
 import ScreenPermissionWarning from '../../component/screen-permission-warning/ScreenPermissionWarning'
 import ProductListItem from '../../component/product-list-item/ProductListItem'
 import Logger from '../../utils/Logger'
-import {getProducts, deleteById} from '../../logic/ProductSource'
+import { getProducts, deleteById } from '../../logic/ProductSource'
 import ItemSeparator from '../../component/item-separator/ItemSeparator'
 import styles from '../../component/common.styles'
 
@@ -15,7 +21,7 @@ const CatalogScreen = observer(({ navigation }) => {
   const { userContext } = userStore
   const items = catalogStore.products.slice()
   const [itemToRemove, setItemToRemove] = useState(null)
-  
+
   const gotoForm = useCallback(
     params => navigation.navigate('ProductForm', params),
     []

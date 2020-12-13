@@ -55,7 +55,7 @@ const CatalogStackScreen = () => {
         }
       }}
     >
-      <Stack.Screen name="CatalogList" component={CatalogScreen}/>
+      <Stack.Screen name="CatalogList" component={CatalogScreen} options={{title: 'Catálogo'}}/>
       <Stack.Screen name='ProductForm' component={ProductForm} />
     </Stack.Navigator>
   )
