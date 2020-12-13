@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { StatusBar } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import {
   DefaultTheme,
@@ -11,8 +12,11 @@ import { MaterialCommunityIcons as MCI } from '@expo/vector-icons'
 import ProductList from './src/screens/product-list/ProductList'
 import LoginScreen from './src/screens/login/LoginScreen'
 import CatalogScreen from './src/screens/catalog/CatalogScreen'
+import ProductForm from './src/screens/product-form/ProductForm'
+import { observer } from 'mobx-react'
 
 const Tab = createBottomTabNavigator()
+const Stack = createStackNavigator()
 
 const theme = {
   ...DefaultTheme,
@@ -40,11 +44,30 @@ const getIconName = (focused, route) => {
   return icons[route.name]?.[key] ?? icons[route.name]?.default
 }
 
+const CatalogStackScreen = () => {
+  return (
+    <Stack.Navigator initialRouteName='CatalogList'>
+      <Stack.Screen
+        name='CatalogList'
+        options={{
+          title: 'Catálogo',
+          headerTintColor: Colors.white,
+          headerStyle: {
+            backgroundColor: theme.colors.primary
+          }
+        }}
+        component={CatalogScreen}
+      />
+      <Stack.Screen name='ProductForm' component={ProductForm} />
+    </Stack.Navigator>
+  )
+}
+
 export default function App () {
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer>
-        <StatusBar />
+        <StatusBar backgroundColor={theme.colors.primary} />
         <Tab.Navigator
           initialRouteName='ProductList'
           tabBarOptions={{
@@ -66,7 +89,7 @@ export default function App () {
           />
           <Tab.Screen
             name='Catalog'
-            component={CatalogScreen}
+            component={CatalogStackScreen}
             options={{
               title: 'Gerenciar Catálogo'
             }}
