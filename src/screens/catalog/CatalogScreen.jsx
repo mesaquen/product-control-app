@@ -1,18 +1,21 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { observer } from 'mobx-react'
 import { SafeAreaView, FlatList } from 'react-native'
-import { IconButton, Colors } from 'react-native-paper'
+import { Button, IconButton, Colors, Dialog, Paragraph } from 'react-native-paper'
 import userStore from '../../mobx/UserStore'
 import catalogStore from '../../mobx/CatalogStore'
 import ScreenPermissionWarning from '../../component/screen-permission-warning/ScreenPermissionWarning'
 import ProductListItem from '../../component/product-list-item/ProductListItem'
 import Logger from '../../utils/Logger'
+import {getProducts, deleteById} from '../../logic/ProductSource'
 import ItemSeparator from '../../component/item-separator/ItemSeparator'
 import styles from '../../component/common.styles'
 
 const CatalogScreen = observer(({ navigation }) => {
   const { userContext } = userStore
   const items = catalogStore.products.slice()
+  const [itemToRemove, setItemToRemove] = useState(null)
+  
   const gotoForm = useCallback(
     params => navigation.navigate('ProductForm', params),
     []
@@ -31,7 +34,7 @@ const CatalogScreen = observer(({ navigation }) => {
     if (items.length === 0) {
       const fetchData = async () => {
         try {
-          const data = await ProductSource.getProducts()
+          const data = await getProducts()
           catalogStore.setProducts(data)
         } catch (e) {
           Logger.error(e)
@@ -45,7 +48,20 @@ const CatalogScreen = observer(({ navigation }) => {
   const handleEdit = id => {
     gotoForm({ id })
   }
-  const handleRemove = () => {}
+  const handleRemove = id => {
+    setItemToRemove(id)
+  }
+
+  const removeItem = async () => {
+    try {
+      await deleteById(itemToRemove)
+      setItemToRemove(null)
+    } catch (e) {
+      Logger.error(e)
+    }
+  }
+
+  const clearItemToRemove = () => setItemToRemove(null)
 
   const renderItem = ({ item }) => {
     return (
@@ -73,6 +89,16 @@ const CatalogScreen = observer(({ navigation }) => {
       ) : (
         <ScreenPermissionWarning navigation={navigation} />
       )}
+      <Dialog visible={itemToRemove} onDismiss={clearItemToRemove}>
+        <Dialog.Title>Remover Item</Dialog.Title>
+        <Dialog.Content>
+          <Paragraph>Deseja remover o item?</Paragraph>
+        </Dialog.Content>
+        <Dialog.Actions>
+          <Button onPress={clearItemToRemove}>Cancelar</Button>
+          <Button onPress={removeItem}>Sim</Button>
+        </Dialog.Actions>
+      </Dialog>
     </SafeAreaView>
   )
 })

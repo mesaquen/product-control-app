@@ -9,3 +9,12 @@ export const getProducts =  async () => {
 
     return []
 }
+
+export const deleteById = async id => {
+    if (id) {
+        return Fetch(`/products/${id}`, {
+            method: 'DELETE'
+        })   
+    }
+    return Promise.reject(null)
+}
