@@ -46,18 +46,16 @@ const getIconName = (focused, route) => {
 
 const CatalogStackScreen = () => {
   return (
-    <Stack.Navigator initialRouteName='CatalogList'>
-      <Stack.Screen
-        name='CatalogList'
-        options={{
-          title: 'Catálogo',
-          headerTintColor: Colors.white,
-          headerStyle: {
-            backgroundColor: theme.colors.primary
-          }
-        }}
-        component={CatalogScreen}
-      />
+    <Stack.Navigator
+      initialRouteName='CatalogList'
+      screenOptions={{
+        headerTintColor: Colors.white,
+        headerStyle: {
+          backgroundColor: theme.colors.primary
+        }
+      }}
+    >
+      <Stack.Screen name="CatalogList" component={CatalogScreen}/>
       <Stack.Screen name='ProductForm' component={ProductForm} />
     </Stack.Navigator>
   )
