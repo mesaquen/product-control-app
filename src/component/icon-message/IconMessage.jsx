@@ -9,7 +9,7 @@ const IconMessage = ({ icon, title, subtitle, buttonLabel, onPress }) => {
     <View style={styles.container}>
       {icon && <Icon size={64} name={icon} />}
       {title && <Title>{title}</Title>}
-      {subtitle && <Text>{subtitle}</Text>}
+      {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
       {buttonLabel && <Button onPress={onPress}>{buttonLabel}</Button>}
     </View>
   )
