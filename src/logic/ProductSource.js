@@ -17,7 +17,6 @@ export const addProduct = async (product) => {
             method: 'POST',
             body: JSON.stringify(product)
         })
-        Logger.log('PERSISTED PRODUCT', persistedProduct)
         return persistedProduct
     } catch (e) {
         Logger.error(e)

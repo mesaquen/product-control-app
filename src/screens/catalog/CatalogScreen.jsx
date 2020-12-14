@@ -60,7 +60,14 @@ const CatalogScreen = observer(({ navigation }) => {
 
   const removeItem = async () => {
     try {
-      await deleteById(itemToRemove)
+      const removedItem = await deleteById(itemToRemove)
+
+      if (removedItem?.id) {
+        const nextProducts = catalogStore.products.filter(
+          item => item.id !== removedItem.id
+        )
+        catalogStore.setProducts(nextProducts)
+      }
       setItemToRemove(null)
     } catch (e) {
       Logger.error(e)
