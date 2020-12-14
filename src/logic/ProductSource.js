@@ -25,6 +25,20 @@ export const addProduct = async (product) => {
     return null
 }
 
+export const updateProduct = async (product, id) => {
+    try {
+        const persistedProduct = await Fetch(`/products/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(product)
+        })
+        return persistedProduct
+    } catch (e) {
+        Logger.error(e)
+    }
+
+    return null
+}
+
 export const deleteById = async id => {
     if (id) {
         return Fetch(`/products/${id}`, {

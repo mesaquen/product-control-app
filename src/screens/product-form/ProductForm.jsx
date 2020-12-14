@@ -6,7 +6,7 @@ import Switch from '../../component/switch/Switch'
 import styles from './ProductForm.styles'
 import catalogStore from '../../mobx/CatalogStore'
 import productStore from '../../mobx/ProductFormStore'
-import { addProduct } from '../../logic/ProductSource'
+import { addProduct, updateProduct } from '../../logic/ProductSource'
 import Logger from '../../utils/Logger'
 
 const BASE_PRODDUCT = { enabled: true, name: '', description: '' }
@@ -27,7 +27,7 @@ const ProductForm = observer(({ route, navigation }) => {
     navigation.setOptions({
       title,
       headerRight: () => (
-        <Button  onPress={save} color={Colors.white}>
+        <Button onPress={save} color={Colors.white}>
           Salvar
         </Button>
       )
@@ -53,11 +53,28 @@ const ProductForm = observer(({ route, navigation }) => {
         setSaving(false)
       }
     }
-    const updateProduct = async data => {}
+    const patchProduct = async (data, id) => {
+      try {
+        const updatedProduct = await updateProduct(data, id)
+        if (updatedProduct?.id) {
+          const nextProducts = catalogStore.products.map(item =>
+            item.id === updatedProduct.id ? updatedProduct : item
+          )
+          catalogStore.setProducts(nextProducts)
+          navigation.goBack()
+        }
+
+      } catch (e) {
+        Logger.error(e)
+      } finally {
+        setSaving(false)
+      }
+    }
+
     if (saving) {
       const product = { enabled, description, name }
       if (id) {
-        updateProduct(product)
+        patchProduct(product, id)
       } else {
         createProduct(product)
       }
