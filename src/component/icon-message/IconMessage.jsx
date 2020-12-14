@@ -4,6 +4,7 @@ import {MaterialCommunityIcons as Icon} from '@expo/vector-icons'
 import { Title, Text, Button } from 'react-native-paper'
 import PropTypes from 'prop-types'
 import styles from './IconMessage.styles'
+
 const IconMessage = ({ icon, title, subtitle, buttonLabel, onPress }) => {
   return (
     <View style={styles.container}>

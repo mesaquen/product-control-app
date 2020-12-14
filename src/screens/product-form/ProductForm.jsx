@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useReducer } from 'react'
 import { observer } from 'mobx-react'
-import { SafeAreaView, Text } from 'react-native'
+import { SafeAreaView } from 'react-native'
 import { Button, Colors, TextInput } from 'react-native-paper'
 import Switch from '../../component/switch/Switch'
 import styles from './ProductForm.styles'

@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import {TextInput, Button } from 'react-native-paper'
+import { TextInput, Button } from 'react-native-paper'
 import { observer } from 'mobx-react'
 import styles from './LoginForm.styles'
-
 
 const LoginForm = observer(({ loading, onSubmit }) => {
   const [identifier, setIdentifier] = useState('')
@@ -25,7 +24,7 @@ const LoginForm = observer(({ loading, onSubmit }) => {
   return (
     <>
       <TextInput
-      icon="camera"
+        icon='camera'
         style={styles.input}
         type='email'
         label='email'
@@ -39,7 +38,7 @@ const LoginForm = observer(({ loading, onSubmit }) => {
         onChangeText={handleChangePassword}
         secureTextEntry={hidePassword}
         mode='outlined'
-        right={<TextInput.Icon name="eye" onPress={togglePasswordVisibility}/>}
+        right={<TextInput.Icon name='eye' onPress={togglePasswordVisibility} />}
       />
       <Button onPress={handlePress} loading={loading} disabled={loading}>
         Continuar
