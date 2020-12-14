@@ -15,3 +15,7 @@ Basic product control react native app using Expo drawer navigation template as 
 
 - Install with `yarn` or `npm install`.
 - Run `expo start` to try it out.
+
+## Account credentials
+
+You can find the credentials at [https://github.com/bravosul/mobile-challenge](https://github.com/bravosul/mobile-challenge#api-de-autentica%C3%A7%C3%A3o)
